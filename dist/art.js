@@ -1,0 +1,13 @@
+export function flowerSVG(color = '#dca6ac', variant = 0) {
+  const petals = Array.from({ length: variant % 2 ? 8 : 6 }, (_, i) => `<ellipse cx="50" cy="24" rx="${variant % 2 ? 8 : 11}" ry="20" transform="rotate(${i * (variant % 2 ? 45 : 60)} 50 43)" fill="${color}" opacity=".92"/>`).join('');
+  return `<svg viewBox="0 0 100 280" preserveAspectRatio="none" aria-hidden="true"><path d="M50 280 Q38 183 50 43" fill="none" stroke="#759575" stroke-width="2.5"/><path d="M47 209 Q2 175 13 145 Q50 153 47 209M46 166 Q87 144 84 119 Q47 126 46 166" fill="#4f775b" stroke="#78966d" stroke-width=".7"/><path d="M47 210L19 157M47 167L79 128" stroke="#9aad794f" fill="none"/>${petals}<circle cx="50" cy="43" r="10" fill="#d9be77"/><circle cx="47" cy="40" r="3" fill="#f4dfac" opacity=".8"/></svg>`;
+}
+export function memorySVG(type) {
+  const stars = Array.from({ length: 28 }, (_, i) => `<circle cx="${(i * 79 + 31) % 500}" cy="${(i * 47 + 23) % 220}" r="${i % 3 === 0 ? 1.5 : .8}" fill="#e8d7ac" opacity="${.25 + (i % 4) * .15}"/>`).join('');
+  const scenes = {
+    night: `<rect width="500" height="350" fill="#263c43"/>${stars}<circle cx="342" cy="88" r="31" fill="#e6d7af"/><path d="M0 258Q95 187 218 253T500 223V350H0" fill="#284b46"/><path d="M0 291Q105 250 248 281T500 252V350H0" fill="#1b3433"/><path d="M208 350L277 264 302 265 255 350" fill="#a6ad8d44"/><path d="M100 350V182M68 249L100 203 130 249M61 278L100 226 138 278" stroke="#152c2c" stroke-width="9" fill="#152c2c"/>`,
+    mountains: `<rect width="500" height="350" fill="#6d777b"/><circle cx="125" cy="95" r="42" fill="#e3bb9a"/><path d="M0 260L143 90 278 252 371 143 500 273V350H0" fill="#7e9191"/><path d="M90 151L143 90 197 155 154 138 136 149 122 133" fill="#c6c4b0"/><path d="M0 288L198 167 325 276 429 202 500 252V350H0" fill="#3d6262"/><path d="M0 281Q166 259 291 296T500 283V350H0" fill="#243f3e"/><path d="M0 324Q161 298 290 323T500 318" stroke="#a5ad9755" stroke-width="2" fill="none"/>`,
+    flowers: `<rect width="500" height="350" fill="#5c6650"/><circle cx="381" cy="67" r="68" fill="#d5c59a" opacity=".16"/><path d="M0 350Q122 122 240 350M104 350Q282 163 427 350" fill="#384d3c"/>${Array.from({length:11},(_,i)=>{const x=30+i*44,y=160+(i*37)%130;return `<path d="M${x} 350Q${x-25} ${y+50} ${x} ${y}" stroke="#b7ba8b" stroke-width="3" fill="none"/><g transform="translate(${x} ${y})">${[0,60,120,180,240,300].map(a=>`<ellipse cy="-12" rx="8" ry="14" fill="${i%2?'#d7b6a7':'#dcd3ac'}" transform="rotate(${a})"/>`).join('')}<circle r="5" fill="#b89f5a"/></g>`;}).join('')}`
+  };
+  return `<svg viewBox="0 0 500 350" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${scenes[type] || scenes.night}</svg>`;
+}
