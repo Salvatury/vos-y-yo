@@ -15,7 +15,8 @@
     .brand{font:20px Georgia,serif;color:var(--pink);margin-bottom:30px}
     .layout{display:grid;gap:28px}
     .photo{margin:0;position:relative;border-radius:18px;overflow:hidden;background:#26342d;aspect-ratio:4/3}
-    .photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block}
+    .photo img{width:100%;height:100%;object-fit:contain;display:block;background:#1a2722}
+    .photo-area{min-width:0}.photo-nav{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:8px}.photo-nav button{background:none;color:var(--cream);border:1px solid #ffffff24;border-radius:6px;padding:8px 12px;font-size:12px;min-height:40px}.photo-nav span{color:var(--muted);font-size:12px}.thumbs{display:flex;gap:8px;overflow-x:auto;padding:12px 3px 6px;scrollbar-width:thin;scrollbar-color:#687c64 transparent}.thumb{flex:0 0 42px;width:42px;height:42px;border-radius:6px;overflow:hidden;border:2px solid transparent;padding:0;background:#26342d}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.thumb[aria-pressed=true]{border-color:var(--pink)}
     .photo:after{content:'';position:absolute;inset:50% 0 0;background:linear-gradient(transparent,#071311d9)}
     figcaption{position:absolute;bottom:18px;left:20px;right:20px;z-index:1;font:italic 21px/1.4 Georgia,serif;text-shadow:0 1px 10px #000}
     .eyebrow{font-size:11px;letter-spacing:2px;color:var(--pink);margin:0 0 14px}
@@ -34,7 +35,7 @@
     dialog{width:min(500px,calc(100% - 30px));max-height:85dvh;overflow:auto;background:#f2e7d4;color:#28382e;border:0;border-radius:14px;padding:42px 28px 28px;box-shadow:0 20px 100px #0008}
     dialog::backdrop{background:#07110ed9;backdrop-filter:blur(5px)}dialog h2{font:32px Georgia,serif;margin:0 0 22px}dialog p{font:17px/1.8 Georgia,serif}dialog .close{position:absolute;right:10px;top:8px;border:0;background:none;color:#314736;font-size:28px;width:40px;height:40px}.signature{text-align:right;font-style:italic;color:#75534b}dialog .primary{background:#314b3a;color:#f2e7d4}
     @keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
-    @media(min-width:720px){main{padding-top:35px}.brand{margin-bottom:35px}.layout{grid-template-columns:1fr 1fr;align-items:center;gap:48px}.photo{aspect-ratio:3/4}.copy{padding-block:10px}footer{margin-top:35px}}
+    @media(min-width:720px){main{padding-top:35px}.brand{margin-bottom:35px}.layout{grid-template-columns:1fr 1fr;align-items:center;gap:48px}.photo{aspect-ratio:1}.copy{padding-block:10px}footer{margin-top:35px}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important}}
   </style>
 </head>
@@ -42,10 +43,14 @@
   <main>
     <header class="brand">✳ El jardín de Jenny</header>
     <div class="layout">
-      <figure class="photo">
-        <img src="nuestro-viaje.jpg" alt="Una moto roja en movimiento; en el espejo, una mano abrazando a quien conduce" width="960" height="1280">
-        <figcaption>Mi lugar favorito,<br>con vos en el camino.</figcaption>
-      </figure>
+      <div class="photo-area" role="region" aria-label="Nuestros recuerdos">
+        <figure class="photo">
+          <img id="main-photo" src="nosotros.png" alt="Una foto de los dos abrazados en el sillón" width="1152" height="864">
+          <figcaption id="photo-caption">Mi lugar favorito siempre es con vos.</figcaption>
+        </figure>
+        <div class="photo-nav"><button id="previous-photo" aria-label="Foto anterior">Anterior</button><span id="photo-count" aria-live="polite">1 de 12</span><button id="next-photo" aria-label="Foto siguiente">Siguiente</button></div>
+        <div class="thumbs" id="thumbs" aria-label="Elegir un recuerdo"></div>
+      </div>
       <section class="copy" aria-labelledby="title">
         <p class="eyebrow">PARA VOS, MI AMOR</p>
         <h1>Con vos,<br><em>todo florece.</em></h1>
@@ -69,6 +74,36 @@
     <button class="primary" id="back">Volver a las flores</button>
   </dialog>
   <script>
+    const photos = [
+      ['nosotros.png','Mi lugar favorito siempre es con vos.','Una foto de los dos abrazados en el sillón'],
+      ['abrazo-real.png','Un abrazo tuyo, y el mundo baja el volumen.','Un abrazo de los dos con los ojos cerrados'],
+      ['juntos.png','Noni y Tury. Así de simple, así de lindo.','Ilustración de los dos juntos en el sillón'],
+      ['abrazo.png','Un ratito más, quedate acá.','Ilustración de un abrazo con los ojos cerrados'],
+      ['nuestro-viaje.jpg','Con vos en el camino.','Una moto roja y un abrazo reflejado en el espejo'],
+      ['jenny.png','Vos, y esa forma de alegrarme el día.','Una selfie de Jenny al aire libre'],
+      ['mirada.png','Esa mirada tuya que me puede.','Un retrato de Jenny con una sonrisa'],
+      ['guiño.png','Mi amor, qué linda sos.','Una selfie de Jenny con la mano cerca de la cara'],
+      ['salva.png','El que se queda sonriendo por tus mensajes.','Una selfie de Salva frente al espejo'],
+      ['sonrisa.png','Tu Tury, pensando en vos.','Una foto de Salva sonriendo sentado a una mesa'],
+      ['salva-tranquilo.png','Y tantas ganas de volver a verte.','Un retrato de Salva con una campera marrón'],
+      ['futuro.png','Un sueño bonito para imaginar con vos.','Ilustración de los dos vestidos de novios, una escena soñada']
+    ];
+    let photoIndex=0;
+    function showPhoto(index){
+      photoIndex=(index+photos.length)%photos.length;
+      const [src,caption,alt]=photos[photoIndex];
+      const image=document.getElementById('main-photo'); image.src=src; image.alt=alt;
+      document.getElementById('photo-caption').textContent=caption;
+      document.getElementById('photo-count').textContent=(photoIndex+1)+' de '+photos.length;
+      document.querySelectorAll('.thumb').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===photoIndex)));
+    }
+    photos.forEach(([src,caption,alt],i)=>{
+      const button=document.createElement('button');button.className='thumb';button.setAttribute('aria-label','Ver recuerdo '+(i+1));button.setAttribute('aria-pressed',String(i===0));
+      const image=document.createElement('img');image.src=src;image.alt='';image.loading='lazy';button.append(image);
+      button.addEventListener('click',()=>showPhoto(i));document.getElementById('thumbs').append(button);
+    });
+    document.getElementById('previous-photo').addEventListener('click',()=>showPhoto(photoIndex-1));
+    document.getElementById('next-photo').addEventListener('click',()=>showPhoto(photoIndex+1));
     // Editá acá la fecha y los tres mensajes. La foto está junto a este archivo.
     const startDate = '2026-10-19';
     const messages = [
