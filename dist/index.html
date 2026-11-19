@@ -1,52 +1,107 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101b1b">
-  <meta name="description" content="Un pequeño universo de flores, recuerdos y palabras para Jenny. Un jardín que crece con nuestro amor.">
-  <title>El jardín de Jenny · Un amor que florece</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101b19">
+  <meta name="description" content="Para Jenny, de Salva. Por nuestro primer mes y todos los caminos que nos quedan.">
+  <title>El jardín de Jenny</title>
+  <style>
+    :root{color-scheme:dark;--pink:#ebbbb7;--cream:#f3ebdc;--muted:#b7c0b3}
+    *{box-sizing:border-box}
+    body{margin:0;background:#101b19;color:var(--cream);font:16px/1.6 system-ui,sans-serif}
+    button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid var(--cream);outline-offset:5px}
+    main{width:min(940px,calc(100% - 36px));margin:auto;padding:28px 0 22px}
+    .brand{font:20px Georgia,serif;color:var(--pink);margin-bottom:30px}
+    .layout{display:grid;gap:28px}
+    .photo{margin:0;position:relative;border-radius:18px;overflow:hidden;background:#26342d;aspect-ratio:4/3}
+    .photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block}
+    .photo:after{content:'';position:absolute;inset:50% 0 0;background:linear-gradient(transparent,#071311d9)}
+    figcaption{position:absolute;bottom:18px;left:20px;right:20px;z-index:1;font:italic 21px/1.4 Georgia,serif;text-shadow:0 1px 10px #000}
+    .eyebrow{font-size:11px;letter-spacing:2px;color:var(--pink);margin:0 0 14px}
+    h1{font:normal clamp(38px,8vw,58px)/1.08 Georgia,serif;letter-spacing:-1.5px;margin:0 0 20px}
+    h1 em{color:var(--pink);font-weight:normal}p{margin:0 0 20px}
+    .intro{color:var(--muted);max-width:420px}.counter{border-block:1px solid #ffffff1c;display:flex;align-items:center;gap:14px;padding:15px 0;margin:22px 0}
+    .counter strong{font:42px/1 Georgia,serif;color:var(--pink)}.counter span{font-size:14px}.counter small{display:block;color:var(--muted);font-size:12px}
+    .flowers{display:flex;gap:14px;align-items:center;margin-top:14px}
+    .flower{border:1px solid #b2caa325;background:#ffffff04;border-radius:50%;width:66px;height:66px;display:grid;place-items:center;position:relative}
+    .flower svg{width:45px;height:45px;animation:sway 3s ease-in-out infinite alternate}.flower:nth-child(2) svg{animation-delay:-1s}.flower:nth-child(3) svg{animation-delay:-2s}
+    .flower:hover{background:#e8b8b515}.flower.seen:after{content:'♡';position:absolute;bottom:-5px;right:-3px;color:var(--pink);background:#101b19;border-radius:50%;padding:0 4px;font-size:14px}
+    .hint{font-size:12px;color:var(--muted);margin:10px 0 18px}
+    .message{font:italic 19px/1.5 Georgia,serif;color:#e8d8bb;min-height:86px;margin:0 0 20px;max-width:420px}
+    .primary{background:var(--pink);color:#24342b;border:0;padding:13px 22px;border-radius:7px;font-size:14px;font-weight:600;min-height:48px}.primary:hover{background:#f3d0c7}
+    footer{color:#94a595;font-size:12px;text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #ffffff14}
+    dialog{width:min(500px,calc(100% - 30px));max-height:85dvh;overflow:auto;background:#f2e7d4;color:#28382e;border:0;border-radius:14px;padding:42px 28px 28px;box-shadow:0 20px 100px #0008}
+    dialog::backdrop{background:#07110ed9;backdrop-filter:blur(5px)}dialog h2{font:32px Georgia,serif;margin:0 0 22px}dialog p{font:17px/1.8 Georgia,serif}dialog .close{position:absolute;right:10px;top:8px;border:0;background:none;color:#314736;font-size:28px;width:40px;height:40px}.signature{text-align:right;font-style:italic;color:#75534b}dialog .primary{background:#314b3a;color:#f2e7d4}
+    @keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+    @media(min-width:720px){main{padding-top:35px}.brand{margin-bottom:35px}.layout{grid-template-columns:1fr 1fr;align-items:center;gap:48px}.photo{aspect-ratio:3/4}.copy{padding-block:10px}footer{margin-top:35px}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
 </head>
 <body>
-  <a class="skip" href="#jardin">Ir al jardín</a>
-  <header class="header wrap">
-    <a class="brand" href="#inicio"><span class="brand-flower" aria-hidden="true">✳</span> El jardín de Jenny<span class="brand-dot">.</span></a>
-    <nav aria-label="Navegación principal"><a href="#jardin">El jardín</a><a href="#recuerdos">Recuerdos</a><a href="#carta">Para vos</a></nav>
-    <button class="icon-button" id="settings" aria-label="Personalizar el jardín" title="Personalizar">⚙</button>
-  </header>
-  <main id="inicio">
-    <section class="hero wrap">
-      <div class="eyebrow"><span></span> PARA JENNY, DE SALVA · NUESTRA HISTORIA</div>
-      <h1>Hay cosas que solo<br>florecen <em>con vos.</em></h1>
-      <p>De aquel primer mensaje a este jardín.<br>Un lugar para todas las veces que te elijo.</p>
-      <a class="primary" href="#jardin">Entrar a nuestro jardín <span aria-hidden="true">✿</span></a>
-      <div class="hero-note">Desde aquel «Soy salva ahí te agendo». ♡</div>
-      <div class="orbit orbit-one" aria-hidden="true">✧</div><div class="orbit orbit-two" aria-hidden="true">✦</div>
-    </section>
-    <section class="garden-section wrap" id="jardin" aria-labelledby="garden-title">
-      <div class="section-heading"><div><div class="eyebrow">DONDE CRECE LO NUESTRO</div><h2 id="garden-title">Nuestro jardín secreto</h2></div><button id="sound" class="quiet-button" aria-pressed="false">♫ <span>Sonido apagado</span></button></div>
-      <div class="garden-frame">
-        <div class="garden-top"><span><span class="live-dot"></span> Siempre hay algo por descubrir</span><span class="moon-label">☾ Bajo la misma luna</span></div>
-        <div class="moon" aria-hidden="true"></div><div id="stars" aria-hidden="true"></div>
-        <div class="garden-whisper" aria-hidden="true">Desde nuestro primer beso,<br><em>todo empezó a florecer.</em></div>
-        <div id="flowers" class="flowers" aria-label="Flores con mensajes secretos"></div>
-        <div class="ground" aria-hidden="true"></div>
-        <div class="garden-bottom"><span id="discovered" aria-live="polite">0 mensajes descubiertos</span><button id="plant" class="plant-button">＋ Plantar una flor</button></div>
-      </div>
-      <p class="hint"><span aria-hidden="true">✧</span> Tocá una flor. Hay algo que quiero decirte.</p>
-    </section>
-    <section class="together wrap" aria-label="Nuestro tiempo juntos"><div class="small-flower" aria-hidden="true">❀</div><div><div class="eyebrow">DESDE QUE COINCIDIMOS</div><div class="day-line"><strong id="days">∞</strong><h2 id="days-label">una historia por escribir</h2></div><p id="date-caption">Cada día con vos merece quedarse.</p></div><button class="text-button" id="set-date">Elegir nuestra fecha</button></section>
-    <section class="story wrap" aria-labelledby="story-title"><div class="section-heading"><div><div class="eyebrow">LAS FECHAS QUE YA SON NUESTRAS</div><h2 id="story-title">Así empezó a florecer lo nuestro</h2></div><span class="handwritten">Noni & Tury ♡</span></div><ol class="timeline" id="timeline"></ol><div class="month-note"><span aria-hidden="true">♡</span><div><h3>Nuestro primer mes de novios</h3><p>19 de noviembre de 2026. De «ya tenemos fecha» a todos los recuerdos que nos quedan.</p></div></div></section>
-    <section class="memories wrap" id="recuerdos" aria-labelledby="memories-title"><div class="section-heading"><div><div class="eyebrow">LO QUE EL CORAZÓN GUARDA</div><h2 id="memories-title">Nuestros pequeños infinitos</h2></div><span class="handwritten">Nosotros, una y otra vez ♡</span></div><div class="memory-grid" id="memory-grid"></div><p class="hint">Recuerdos nuestros, dibujados con amor. Podés sumar tus fotos; quedan solo en este navegador.</p></section>
-    <section class="letter-section wrap" id="carta"><div class="letter-decoration" aria-hidden="true">✉</div><div class="eyebrow">POR NUESTRO PRIMER MES DE NOVIOS</div><h2>Mi amor, hay cosas<br><em>que quiero guardarte.</em></h2><p>Lo que empezó con un mensaje<br>hoy también florece en estas palabras.</p><button class="primary" id="open-letter">Abrir mi carta <span aria-hidden="true">♡</span></button><span id="letter-status" class="letter-status"></span></section>
+  <main>
+    <header class="brand">✳ El jardín de Jenny</header>
+    <div class="layout">
+      <figure class="photo">
+        <img src="nuestro-viaje.jpg" alt="Una moto roja en movimiento; en el espejo, una mano abrazando a quien conduce" width="960" height="1280">
+        <figcaption>Mi lugar favorito,<br>con vos en el camino.</figcaption>
+      </figure>
+      <section class="copy" aria-labelledby="title">
+        <p class="eyebrow">PARA VOS, MI AMOR</p>
+        <h1>Con vos,<br><em>todo florece.</em></h1>
+        <p class="intro">Del primer beso de aquel martes 13 a todos los caminos que nos quedan. Qué lindo es que seas vos, Jenny.</p>
+        <div class="counter"><strong id="days">♡</strong><span>días eligiéndonos<small>Desde el 19 de octubre de 2026</small></span></div>
+        <div class="flowers" aria-label="Tres flores con mensajes" id="flowers"></div>
+        <p class="hint">Tocá una flor. Guardé algo para vos.</p>
+        <p class="message" id="message" aria-live="polite">Un beso, un heladito de la mano y vos. A veces la felicidad se parece mucho a eso.</p>
+        <button class="primary" id="open-letter">Una cartita para vos ♡</button>
+      </section>
+    </div>
+    <footer>Por nuestro primer mes, este 19 de noviembre. Con amor, tu Salva · tu Tury ♡</footer>
   </main>
-  <footer class="wrap"><span>El jardín de Jenny <span aria-hidden="true">✳</span></span><p>Desde el 19 de octubre de 2026. Una flor, un recuerdo y un día a la vez.</p><span class="footer-love">Tu Salva, tu Tury ♡</span></footer>
-  <div id="toast" role="status"></div>
-  <dialog id="message-dialog" class="message-dialog"><button class="close" data-close aria-label="Cerrar">×</button><span class="dialog-flower" aria-hidden="true">❀</span><div class="eyebrow">UNA FLOR, UNA RAZÓN</div><h2 id="message-title"></h2><p id="message-body"></p><button class="quiet-button" data-close>Guardar en el corazón ♡</button></dialog>
-  <dialog id="letter-dialog" class="letter-dialog"><button class="close" data-close aria-label="Cerrar carta">×</button><div class="eyebrow">PARA MI PERSONA FAVORITA</div><h2 id="letter-greeting"></h2><div id="letter-body"></div><p class="signature" id="letter-signature"></p><button class="quiet-button" data-close>Volver al jardín</button></dialog>
-  <dialog id="memory-dialog"><button class="close" data-close aria-label="Cerrar recuerdo">×</button><div id="memory-view"></div><h2 id="memory-title"></h2><p id="memory-caption"></p><label class="primary upload-label">Elegir una foto<input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp"></label><button class="text-button" id="remove-photo">Restaurar ilustración</button></dialog>
-  <dialog id="settings-dialog"><button class="close" data-close aria-label="Cerrar ajustes">×</button><div class="eyebrow">HACÉ ESTE JARDÍN TUYO</div><h2>Lo que nos cuenta</h2><form id="settings-form"><label>Nombre de tu persona favorita<input name="name" maxlength="40" required autocomplete="off"></label><label>¿Cuándo comenzó nuestra historia?<input name="date" type="date"></label><p class="form-note">Podés dejar la fecha vacía. Los cambios y las fotos quedan en este dispositivo.</p><button class="primary" type="submit">Guardar con amor</button></form><p id="storage-status" class="form-note"></p></dialog>
+  <dialog id="letter" aria-labelledby="letter-title">
+    <button class="close" id="close-letter" aria-label="Cerrar carta">×</button>
+    <h2 id="letter-title">Meeeamor,</h2>
+    <p>Todo empezó con un «Soy salva ahí te agendo». Después llegó ese martes 13: vos esperándome, yo cruzando la calle y un primer beso que nos cambió la suerte.</p>
+    <p>Me guardo el heladito de la mano, los viajes en moto, tu risa y todas las veces que nos dijimos que somos un equipo. El 19 de octubre se volvió nuestro. Este primer mes también.</p>
+    <p>Vos me dijiste «Te elijo y te sigo eligiendo...». Yo también, Jenny. Por lo que ya vivimos y por todo lo lindo que todavía nos queda. Te amo, mi amor.</p>
+    <p class="signature">Tu Salva, tu Tury ♡</p>
+    <button class="primary" id="back">Volver a las flores</button>
+  </dialog>
+  <script>
+    // Editá acá la fecha y los tres mensajes. La foto está junto a este archivo.
+    const startDate = '2026-10-19';
+    const messages = [
+      'Nuestro martes 13 no trajo mala suerte. Trajo tu primer beso y esa imagen de vos esperándome que no se me borra más.',
+      'Un heladito de la mano, una peli con mates y muchos mimos. Con vos, los planes simples se vuelven mis favoritos.',
+      '«Te elijo y te sigo eligiendo...». Yo también, Noni. En este primer mes y en todos los caminos que nos quedan. Tu Tury ♡'
+    ];
+    let seen = [];
+    try { const saved = JSON.parse(localStorage.getItem('jenny-simple') || '[]'); if(Array.isArray(saved)) seen = saved.filter(i => Number.isInteger(i) && i >= 0 && i < 3); } catch {}
+    const colors = ['#e4abb8','#d1c0e4','#e4d0a1'];
+    messages.forEach((text,i) => {
+      const flower = document.createElement('button');
+      flower.className = 'flower' + (seen.includes(i) ? ' seen' : '');
+      flower.setAttribute('aria-label', ['Nuestro primer beso','Nuestros planes simples','Te sigo eligiendo'][i]);
+      flower.setAttribute('aria-pressed', String(seen.includes(i)));
+      flower.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true">' + Array.from({length:6},(_,j) => '<ellipse cx="50" cy="29" rx="13" ry="24" transform="rotate(' + j*60 + ' 50 50)" fill="' + colors[i] + '"/>').join('') + '<circle cx="50" cy="50" r="12" fill="#f1d892"/></svg>';
+      flower.addEventListener('click', () => {
+        document.getElementById('message').textContent = text;
+        flower.classList.add('seen'); flower.setAttribute('aria-pressed','true');
+        if(!seen.includes(i)) seen.push(i);
+        try { localStorage.setItem('jenny-simple', JSON.stringify(seen)); } catch {}
+      });
+      document.getElementById('flowers').append(flower);
+    });
+    function countDays(){
+      const now = new Date(); const [y,m,d] = startDate.split('-').map(Number);
+      document.getElementById('days').textContent = Math.max(0,Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(y,m-1,d))/86400000));
+    }
+    countDays(); setInterval(countDays,60000); document.addEventListener('visibilitychange',countDays);
+    const letter = document.getElementById('letter');
+    document.getElementById('open-letter').addEventListener('click',()=>letter.showModal());
+    ['close-letter','back'].forEach(id=>document.getElementById(id).addEventListener('click',()=>letter.close()));
+    letter.addEventListener('click',e=>{const r=letter.getBoundingClientRect();if(e.target===letter&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))letter.close();});
+  </script>
 </body>
 </html>
