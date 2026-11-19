@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#101b19">
-  <meta name="description" content="Para Jenny, de Salva. Por nuestro primer mes y todos los caminos que nos quedan.">
-  <title>El jardín de Jenny</title>
+  <meta name="description" content="Jenny y Salva. Nuestro primer mes, las fotos y lo que nos decimos.">
+  <title>Vos y yo</title>
   <style>
     :root{color-scheme:dark;--pink:#ebbbb7;--cream:#f3ebdc;--muted:#b7c0b3}
     *{box-sizing:border-box}
@@ -41,62 +41,62 @@
 </head>
 <body>
   <main>
-    <header class="brand">✳ El jardín de Jenny</header>
+    <header class="brand">Vos y yo</header>
     <div class="layout">
       <div class="photo-area" role="region" aria-label="Nuestros recuerdos">
         <figure class="photo">
           <img id="main-photo" src="nosotros.png" alt="Una foto de los dos abrazados en el sillón" width="1152" height="864">
-          <figcaption id="photo-caption">Mi lugar favorito siempre es con vos.</figcaption>
+          <figcaption id="photo-caption">Vos y yo.</figcaption>
         </figure>
         <div class="photo-nav"><button id="previous-photo" aria-label="Foto anterior">Anterior</button><span id="photo-count" aria-live="polite">1 de 22</span><button id="next-photo" aria-label="Foto siguiente">Siguiente</button></div>
         <div class="thumbs" id="thumbs" aria-label="Elegir un recuerdo"></div>
       </div>
       <section class="copy" aria-labelledby="title">
-        <p class="eyebrow">PARA VOS, MI AMOR</p>
-        <h1>Con vos,<br><em>todo florece.</em></h1>
-        <p class="intro">Del primer beso de aquel martes 13 a todos los caminos que nos quedan. Qué lindo es que seas vos, Jenny.</p>
-        <div class="counter"><strong id="days">♡</strong><span>días eligiéndonos<small>Desde el 19 de octubre de 2026</small></span></div>
+        <p class="eyebrow">19 DE OCTUBRE · NOSOTROS</p>
+        <h1>Un mes<br><em>con vos.</em></h1>
+        <p class="intro">Un martes 13, nuestro primer beso. El 19, «ya tenemos fecha». Y acá estamos, Jenny.</p>
+        <div class="counter"><strong id="days">♡</strong><span>días juntos<small>Desde el 19 de octubre de 2026</small></span></div>
         <div class="flowers" aria-label="Tres flores con mensajes" id="flowers"></div>
-        <p class="hint">Tocá una flor. Guardé algo para vos.</p>
-        <p class="message" id="message" aria-live="polite">Un beso, un heladito de la mano y vos. A veces la felicidad se parece mucho a eso.</p>
-        <button class="primary" id="open-letter">Una cartita para vos ♡</button>
+        <p class="hint">Tres cosas que quería decirte. Tocá una flor.</p>
+        <p class="message" id="message" aria-live="polite">«Ya somos un gran equipo». Lo dijimos y lo sigo pensando.</p>
+        <button class="primary" id="open-letter">Te quería decir algo</button>
       </section>
     </div>
-    <footer>Por nuestro primer mes, este 19 de noviembre. Con amor, tu Salva · tu Tury ♡</footer>
+    <footer>19 de noviembre · Nuestro primer mes. — Salva</footer>
   </main>
   <dialog id="letter" aria-labelledby="letter-title">
     <button class="close" id="close-letter" aria-label="Cerrar carta">×</button>
-    <h2 id="letter-title">Meeeamor,</h2>
-    <p>Todo empezó con un «Soy salva ahí te agendo». Después llegó ese martes 13: vos esperándome, yo cruzando la calle y un primer beso que nos cambió la suerte.</p>
-    <p>Me guardo el heladito de la mano, los viajes en moto, tu risa y todas las veces que nos dijimos que somos un equipo. El 19 de octubre se volvió nuestro. Este primer mes también.</p>
-    <p>Vos me dijiste «Te elijo y te sigo eligiendo...». Yo también, Jenny. Por lo que ya vivimos y por todo lo lindo que todavía nos queda. Te amo, mi amor.</p>
-    <p class="signature">Tu Salva, tu Tury ♡</p>
-    <button class="primary" id="back">Volver a las flores</button>
+    <h2 id="letter-title">Amor,</h2>
+    <p>Arrancamos con un «Soy salva ahí te agendo» y terminamos hablando a cualquier hora. Después vino ese martes 13. Vos esperándome y yo con el corazón que se me salía del pecho.</p>
+    <p>Me acuerdo de caminar de la mano con un helado, de la moto y de decir «ya tenemos fecha». Este 19 cumplimos un mes de novios. Y como te dije en el chat, pareciera que vamos mucho más.</p>
+    <p>Vos dijiste «Quiero todo con vos». Yo también. Quiero que sigamos viéndonos, riéndonos y haciendo planes. Somos un equipo, amor. Te amo.</p>
+    <p class="signature">Salva</p>
+    <button class="primary" id="back">Volver</button>
   </dialog>
   <script>
     const photos = [
-      ['nosotros.png','Mi lugar favorito siempre es con vos.','Una foto de los dos abrazados en el sillón'],
-      ['abrazo-real.png','Un abrazo tuyo, y el mundo baja el volumen.','Un abrazo de los dos con los ojos cerrados'],
-      ['juntos.png','Noni y Tury. Así de simple, así de lindo.','Ilustración de los dos juntos en el sillón'],
-      ['abrazo.png','Un ratito más, quedate acá.','Ilustración de un abrazo con los ojos cerrados'],
+      ['nosotros.png','Vos y yo.','Una foto de los dos abrazados en el sillón'],
+      ['abrazo-real.png','Un rato así.','Un abrazo de los dos con los ojos cerrados'],
+      ['juntos.png','Jenn y Salva.','Ilustración de los dos juntos en el sillón'],
+      ['abrazo.png','«Quedate».','Ilustración de un abrazo con los ojos cerrados'],
       ['nuestro-viaje.jpg','Con vos en el camino.','Una moto roja y un abrazo reflejado en el espejo'],
-      ['jenny.png','Vos, y esa forma de alegrarme el día.','Una selfie de Jenny al aire libre'],
-      ['mirada.png','Esa mirada tuya que me puede.','Un retrato de Jenny con una sonrisa'],
-      ['guiño.png','Mi amor, qué linda sos.','Una selfie de Jenny con la mano cerca de la cara'],
-      ['salva.png','El que se queda sonriendo por tus mensajes.','Una selfie de Salva frente al espejo'],
-      ['sonrisa.png','Tu Tury, pensando en vos.','Una foto de Salva sonriendo sentado a una mesa'],
-      ['salva-tranquilo.png','Y tantas ganas de volver a verte.','Un retrato de Salva con una campera marrón'],
-      ['rulos.png','Me enamoran esos bucles tuyos.','Un retrato de Jenny con rulos y campera negra'],
-      ['colores.png','Vos le ponés color a mis días.','Una selfie de Jenny con un vestido de colores'],
-      ['su-sonrisa.png','Esa sonrisa es mi plan favorito.','Jenny sonriendo con la mano junto a su cara'],
-      ['descanso.png','Hasta en los días tranquilos, pensando en vos.','Salva descansando con un buzo negro'],
-      ['verde.png','Otra razón para quedarme mirándote.','Una selfie de Jenny con una campera verde'],
-      ['cerquita.png','Qué lindo encontrarte del otro lado.','Una selfie de Jenny con el cabello suelto'],
-      ['ternura.png','Tu ternura, de esas cosas que me guardo.','Jenny con las manos apoyadas en su mejilla'],
-      ['otra-sonrisa.png','Una sonrisa tuya y ya me alegraste el día.','Jenny sonriendo con una remera verde'],
-      ['rojo.png','Me gustás vos, en cada versión tuya.','Una selfie de Jenny con una remera roja y camisa de jean'],
-      ['sueno.png','Un sueño para imaginar juntos.','Una escena de los dos vestidos de novios en una iglesia'],
-      ['futuro.png','Y todos los sueños que nos quedan.','Ilustración de los dos vestidos de novios, una escena soñada']
+      ['jenny.png','«Vos me haces feliz».','Una selfie de Jenny al aire libre'],
+      ['mirada.png','Esa mirada.','Un retrato de Jenny con una sonrisa'],
+      ['guiño.png','Vos.','Una selfie de Jenny con la mano cerca de la cara'],
+      ['salva.png','«Soy salva ahí te agendo».','Una selfie de Salva frente al espejo'],
+      ['sonrisa.png','Salva.','Una foto de Salva sonriendo sentado a una mesa'],
+      ['salva-tranquilo.png','«Te extraño».','Un retrato de Salva con una campera marrón'],
+      ['rulos.png','Esos bucles.','Un retrato de Jenny con rulos y campera negra'],
+      ['colores.png','Otra de mis favoritas.','Una selfie de Jenny con un vestido de colores'],
+      ['su-sonrisa.png','«Amo tu risa mi amor».','Jenny sonriendo con la mano junto a su cara'],
+      ['descanso.png','Una pausa.','Salva descansando con un buzo negro'],
+      ['verde.png','Linda, vos.','Una selfie de Jenny con una campera verde'],
+      ['cerquita.png','«Quiero todo con vos».','Una selfie de Jenny con el cabello suelto'],
+      ['ternura.png','Así, sin más.','Jenny con las manos apoyadas en su mejilla'],
+      ['otra-sonrisa.png','Esa sonrisa.','Jenny sonriendo con una remera verde'],
+      ['rojo.png','También esta.','Una selfie de Jenny con una remera roja y camisa de jean'],
+      ['sueno.png','Un sueño.','Una escena de los dos vestidos de novios en una iglesia'],
+      ['futuro.png','Un sueño pendiente.','Ilustración de los dos vestidos de novios, una escena soñada']
     ];
     let photoIndex=0;
     function showPhoto(index){
@@ -117,9 +117,9 @@
     // Editá acá la fecha y los tres mensajes. La foto está junto a este archivo.
     const startDate = '2026-10-19';
     const messages = [
-      'Nuestro martes 13 no trajo mala suerte. Trajo tu primer beso y esa imagen de vos esperándome que no se me borra más.',
-      'Un heladito de la mano, una peli con mates y muchos mimos. Con vos, los planes simples se vuelven mis favoritos.',
-      '«Te elijo y te sigo eligiendo...». Yo también, Noni. En este primer mes y en todos los caminos que nos quedan. Tu Tury ♡'
+      'Un martes 13 de octubre, nuestro primer beso. Como dijiste vos: «Y de ahí no nos soltamos más».',
+      'Caminar de la mano y tomar un helado. O quedarnos mirando una peli, tomando mates y con muchos mimos. Esos planes con vos.',
+      '«Te elijo y te sigo eligiendo...». Yo también, Jenn. Quiero todo con vos.'
     ];
     let seen = [];
     try { const saved = JSON.parse(localStorage.getItem('jenny-simple') || '[]'); if(Array.isArray(saved)) seen = saved.filter(i => Number.isInteger(i) && i >= 0 && i < 3); } catch {}
@@ -150,3 +150,5 @@
   </script>
 </body>
 </html>
+
+
