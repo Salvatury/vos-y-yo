@@ -2,6 +2,7 @@ import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
+import { CONFIG } from '../dist/config.js';
 // npm install --no-save playwright, or use the host's bundled library.
 let playwright;
 try { playwright = createRequire(import.meta.url)('playwright'); }
@@ -18,6 +19,10 @@ try {
   const response = await page.goto(base); assert.equal(response.status(), 200);
   await page.locator('.flower').first().waitFor();
   assert.equal(await page.locator('.flower').count(), 8);
+  assert.match(await page.locator('#date-caption').textContent(), /19 de octubre de 2026/);
+  assert.deepEqual(await page.locator('#timeline time').evaluateAll(nodes => nodes.map(n => n.dateTime)), ['2026-10-03', '2026-10-13', '2026-10-19']);
+  assert.equal(new Set(CONFIG.messages.map(m => m.text)).size, 24);
+  report.push('Fecha real de noviazgo, tres hitos de la historia y 24 mensajes diferentes.');
   await page.screenshot({ path: folder + '/desktop.png', fullPage: true });
   for (let i = 0; i < 8; i++) {
     await page.locator('.flower').nth(i).focus(); await page.keyboard.press('Enter');
@@ -49,7 +54,9 @@ try {
   report.push('Carta completa, personalizada, reabrible y con estado persistente.');
   for (let i = 0; i < 3; i++) {
     await page.locator('.memory-card').nth(i).click(); await page.locator('#memory-dialog[open]').waitFor();
-    assert.ok(await page.locator('#memory-view svg').count()); await page.keyboard.press('Escape');
+    assert.ok(await page.locator('#memory-view svg').count());
+    assert.equal(await page.locator('#memory-caption').textContent(), CONFIG.memories[i].detail);
+    await page.keyboard.press('Escape');
   }
   await page.locator('.memory-card').first().click();
   const photo = await page.evaluate(() => {
@@ -69,6 +76,12 @@ try {
   report.push('Audio ambiente activable y desactivable.');
   for (let i = 0; i < 15; i++) await page.locator('#plant').click();
   assert.equal(await page.locator('.flower').count(), 24); assert.equal(await page.locator('#plant').isDisabled(), true);
+  for (let i = 8; i < 24; i++) {
+    await page.locator('.flower').nth(i).focus(); await page.keyboard.press('Enter');
+    assert.equal(await page.locator('#message-title').textContent(), CONFIG.messages[i].title);
+    await page.keyboard.press('Escape');
+  }
+  assert.equal(await page.locator('#discovered').textContent(), '24 de 24 flores descubiertas');
   report.push('Límite de 24 flores y botón de plantar deshabilitado al completarlo.');
   await context.close();
   for (const width of [320, 375, 390, 768]) {

@@ -120,7 +120,7 @@ function renderMemories() {
 function renderMemoryDialog() {
   $('memory-view').replaceChildren(artElement(activeMemory));
   $('memory-title').textContent = CONFIG.memories[activeMemory].title;
-  $('memory-caption').textContent = CONFIG.memories[activeMemory].caption;
+  $('memory-caption').textContent = CONFIG.memories[activeMemory].detail || CONFIG.memories[activeMemory].caption;
   $('remove-photo').hidden = !state.photos[activeMemory];
 }
 // Reduce each photograph before persistence: three photos stay comfortably below common storage limits.
@@ -151,6 +151,14 @@ $('photo-input').addEventListener('change', async e => {
 });
 $('remove-photo').addEventListener('click', () => {
   state.photos[activeMemory] = ''; persist(); renderMemories(); renderMemoryDialog(); toast('La ilustración volvió a su lugar.');
+});
+CONFIG.milestones.forEach(item => {
+  const entry = document.createElement('li');
+  const date = document.createElement('time'); date.dateTime = item.date;
+  date.textContent = new Intl.DateTimeFormat('es-AR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(item.date + 'T12:00:00'));
+  const title = document.createElement('h3'); title.textContent = item.title;
+  const text = document.createElement('p'); text.textContent = item.text;
+  entry.append(date, title, text); $('timeline').append(entry);
 });
 CONFIG.letter.forEach(text => { const p = document.createElement('p'); p.textContent = text; $('letter-body').append(p); });
 $('letter-signature').textContent = CONFIG.signature + ' ♡';
